@@ -60,4 +60,38 @@
         })
       });
   </script>
+	  <script>
+// Store XMLHttpRequest and the JSON file location in variables
+var xhr = new XMLHttpRequest();
+var url = "http://35.228.76.197:3000/posts";
+
+// Called whenever the readyState attribute changes 
+xhr.onreadystatechange = function() {
+
+  // Check if fetch request is done
+  if (xhr.readyState == 4 && xhr.status == 200) { 
+  
+    // Parse the JSON string
+    var jsonData = JSON.parse(xhr.responseText);
+    
+    show(jsonData);
+    
+  }
+};
+
+// Do the HTTP call using the url variable we specified above
+xhr.open("GET", url, true);
+xhr.send();
+
+// Function that formats the string with HTML tags, then outputs the result
+function show(data) {
+    var output = "<ul>"; // Open list 
+        output += "<li>" + data[0].id + data[0].title + data[0].author + "</li>"
+ 
+    output += "</ul>"; // Close list
+
+    document.getElementById("response").innerHTML = output;
+
+}
+</script>
 </html>
